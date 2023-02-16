@@ -2,10 +2,10 @@
   "name": "lenslight_tr",
   "version": "1.0.0",
   "description": "lenglight project",
-  "main": "app.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js"
+    "start": "node server.js"
   },
   "author": "Hasan Verdiyev",
   "license": "ISC",
