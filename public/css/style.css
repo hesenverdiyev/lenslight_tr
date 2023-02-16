@@ -825,7 +825,7 @@ ul.social_icon li a i:hover {
     border: #6b6b6b solid 1px;
 }
 
-.main_form .form_cont {
+.main_form #messageplace {
     margin-bottom: 40px;
     width: 100%;
     background:#fff;
@@ -844,7 +844,7 @@ ul.social_icon li a i:hover {
 .group_form .send_btn {
     font-size: 18px;
     transition: ease-in all 0.5s;
-    background-color: #2a2929;
+    background-color: #fa3e8a;
     color: #fff;
     max-width: 159px;
     width: 100%;
@@ -856,7 +856,7 @@ ul.social_icon li a i:hover {
 }
 
 .group_form .send_btn:hover {
-    background-color: #fa3e8a;
+    background-color: #2a2929;
     transition: ease-in all 0.5s;
     color: #fff;
 }

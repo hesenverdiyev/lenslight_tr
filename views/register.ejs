@@ -1,119 +1,267 @@
-<%- include("partials/_header") %>
-   <!-- body -->
+<!DOCTYPE html>
+<html lang="en">
 
-   <body class="main-layout inner_page">
-      <!-- loader  -->
-      <div class="loader_bg">
-         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
-      </div>
-      <!-- end loader -->
+<head>
+   <!-- basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <!-- mobile metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <!-- site metas -->
+   <title>lenslight</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- bootstrap css -->
+   <link rel="stylesheet" href="/css/bootstrap.min.css">
+   <!-- style css -->
+   <link rel="stylesheet" href="/css/style.css">
+   <!-- Responsive-->
+   <link rel="stylesheet" href="/css/responsive.css">
+   <!-- fevicon -->
+   <link rel="icon" href="images/fevicon.png" type="image/gif" />
+   <!-- Tweaks for older IEs-->
+   <link rel="stylesheet" href="/css/owl.carousel.min.css">
+   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+   <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
+   <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+   <style>
+      input[name="email"] {
+         border: 1px solid #6b6b6b !important;
+      }
 
-      <!-- header -->
-      <%- include("partials/_menu") %>
-         <!-- end header inner -->
-         <!-- contact -->
-         <div class="contact">
-            <div class="container">
-               <div class="row">
-                  <div class="col-md-12 ">
-                     <div class="titlepage text_align_center">
-                        <h2>Register</h2>
-                     </div>
+      .btn-outline-secondary {
+         color: #ffffff;
+         background-color: #fa3e8a;
+         border-color: #6b6b6b;
+      }
+
+      input[name="otp"] {
+         border: 1px solid #fa3e8a;
+
+      }
+
+      #button-addon3 {
+         color: #ffffff;
+         background-color: #fa3e8a;
+      }
+
+      input[name="otp"]:focus,
+      input[name="email"]:focus {
+         border: 1px solid #6b6b6b !important;
+
+      }
+   </style>
+</head>
+<!-- body -->
+
+<body class="main-layout inner_page">
+   <!-- loader  -->
+   <div class="loader_bg">
+      <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+   </div>
+   <!-- end loader -->
+
+   <!-- header -->
+   <%- include("partials/_menu") %>
+      <!-- end header inner -->
+      <!-- contact -->
+      <div class="contact">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12 ">
+                  <div class="titlepage text_align_center">
+                     <h2>Register</h2>
                   </div>
-                  <div class="col-md-8 offset-md-2">
-                     <form id="request" class="main_form" action="users/register" method="POST">
-                        <div class="row">
-                           <div class="col-md-12">
-                              <input class="form_control" placeholder="Username" type="text" name="username">
-                           </div>
-                           <div class="col-md-12">
-                              <div style="display: none;" class="alert alert-danger" id="username"></div>
-                           </div>
-                           <div class="col-md-12">
-                              <input class="form_control" placeholder="Email" type="text" name="email">
-                           </div>
-                           <div class="col-md-12">
-                              <div style="display: none;" class="alert alert-danger" id="email"></div>
-                           </div>
-                           <div class="col-md-12">
-                              <input class="form_control" placeholder="Password" type="password" name="password">
-                           </div>
-                           <div class="col-md-12">
-                              <div style="display: none;" class="alert alert-danger" id="password"></div>
-                           </div>
-                           <div class="col-md-12">
-                              <div class="group_form">
-                                 <button class="send_btn">Register</button>
-                              </div>
+               </div>
+               <div class="col-md-8 offset-md-2">
+                  <form id="request" class="main_form" action="users/register" method="POST">
+                     <div class="row">
+                        <div class="col-md-12">
+                           <input class="form_control" placeholder="Username" type="text" name="username">
+                        </div>
+                        <div class="col-md-12">
+                           <div style="display: none;" class="alert alert-danger" id="username"></div>
+                        </div>
+                        <div class="input-group mb-3" style="padding-left: 15px; padding-right: 15px;">
+                           <input type="text" name="email" class="form-control" placeholder="Email"
+                              aria-describedby="button-addon2">
+                           <div class="input-group-append">
+                              <button class="btn btn-outline-secondary" id="button-addon2" action="users/otpcodesend"
+                                 method="POST">verify email</button>
                            </div>
                         </div>
-                     </form>
-                  </div>
+                        <div class="input-group mb-3" style="padding-left: 15px; width: 50%;">
+                           <input type="text" name="otp" class="form-control"
+                              placeholder="Enter confirmation code" aria-describedby="button-addon3">
+                           <div class="input-group-append">
+                              <button class="btn btn-outline-secondary" id="button-addon3" action="users/otpverify"
+                              method="POST">check code</button>
+                           </div>
+                        </div>
+                        <div class="col-md-12">
+                           <div style="display: none;" class="alert alert-danger" id="email"></div>
+                        </div>
+                        <div class="col-md-12">
+                           <input class="form_control" placeholder="Password" type="password" name="password">
+                        </div>
+                        <div class="col-md-12">
+                           <div style="display: none;" class="alert alert-danger" id="password"></div>
+                        </div>
+                        <div class="col-md-12">
+                           <div class="group_form">
+                              <input id="submitButton" style="width: 80px; height: 45px;" type="submit" value="Register"
+                                 disabled />
+                           </div>
+                        </div>
+                     </div>
+                  </form>
                </div>
             </div>
          </div>
+      </div>
 
-         <script>
-            const form = document.querySelector('form')
-            const emailError = document.querySelector('#email')
-            const passwordError = document.querySelector('#password')
-            const usernameError = document.querySelector('#username')
+      <script>
+         const form = document.querySelector('form')
+         const emailError = document.querySelector('#email')
+         const passwordError = document.querySelector('#password')
+         const usernameError = document.querySelector('#username')
 
-            form.addEventListener("submit", async (e) => {
-               e.preventDefault();
+         form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-               emailError.textContent = "";
-               passwordError.textContent = "";
-               usernameError.textContent = "";
-               emailError.style.display = "none"
-               passwordError.style.display = "none"
-               usernameError.style.display = "none"
+            emailError.textContent = "";
+            passwordError.textContent = "";
+            usernameError.textContent = "";
+            emailError.style.display = "none"
+            passwordError.style.display = "none"
+            usernameError.style.display = "none"
 
-               const email = form.email.value
-               const password = form.password.value
-               const username = form.username.value
+            const email = form.email.value
+            const password = form.password.value
+            const username = form.username.value
 
-               try {
-                  const res = await fetch('users/register', {
-                     method: "POST",
-                     body: JSON.stringify({ email, password, username }),
-                     headers: { "Content-Type": "application/json" }
-                  })
+            try {
+               const res = await fetch('users/register', {
+                  method: "POST",
+                  body: JSON.stringify({ email, password, username }),
+                  headers: { "Content-Type": "application/json" }
+               })
 
-                  const data = await res.json();
-
-                 
-                  if (data) {
-
-                     if (data.email) {
-                        emailError.textContent = data.email
-                        emailError.style.display = "block"
-                     }
-
-                     if (data.password) {
-                        passwordError.textContent = data.password
-                        passwordError.style.display = "block"
-                     }
-
-                     if (data.username) {
-                        usernameError.textContent = data.username
-                        usernameError.style.display = "block"
-                     }
+               const data = await res.json();
 
 
-                  } 
+               if (data) {
 
-                  if(data.user){
-                     location.assign("/login")
+                  if (data.email) {
+                     emailError.textContent = data.email
+                     emailError.style.display = "block"
                   }
 
-               } catch (err) {
-                     console.log("ERR::" + err);
+                  if (data.password) {
+                     passwordError.textContent = data.password
+                     passwordError.style.display = "block"
+                  }
+
+                  if (data.username) {
+                     usernameError.textContent = data.username
+                     usernameError.style.display = "block"
+                  }
+
+
                }
-            })
-         </script>
+
+               if (data.user) {
+                  location.assign("/login")
+               }
+
+            } catch (err) {
+               console.log("ERR::" + err);
+            }
+         })
+      </script>
+
+      <script>
+
+         const verifybutton = document.getElementById('button-addon2');
+
+         verifybutton.addEventListener("click", async (e) => {
+            e.preventDefault();
+            
+            verifybutton.style.backgroundColor = "#6c757d";
+
+            const email = form.email.value;
+
+            try {
+               const res = await fetch('/users/otpcodesend', {
+                  method: "POST",
+                  body: JSON.stringify({ email }),
+                  headers: { "Content-Type": "application/json" }
+               })
+
+               const data = await res.json();
+
+               console.log("DATA", data)
+
+               if (data.succeeded) {
+
+               }
 
 
-         <!-- end contact -->
-         <!-- end footer -->
-         <%- include("partials/_footer") %>
+            } catch (err) {
+               console.log("ERR::", err)
+            }
+         })
+      </script>
+
+      <script>
+
+const otpinputarea = document.querySelector('.form-control[name="otp"]');
+const otpbutton = document.getElementById('button-addon3');
+const submitbutton = document.getElementById("submitButton");
+       
+otpbutton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    
+    const email = form.email.value;
+    const otp = form.otp.value;
+
+    try {
+       const res = await fetch('/users/otpverify', {
+          method: "POST",
+          body: JSON.stringify({ email,otp }),
+          headers: { "Content-Type": "application/json" }
+       })
+
+       const data = await res.json();
+
+       console.log("DATA2", data)
+
+       if (data.exists) {
+        otpinputarea.style.borderColor = "green";
+        otpbutton.style.backgroundColor = "green";
+        otpbutton.textContent = "verified"
+        submitbutton.disabled = false;
+       } else {
+           otpbutton.style.backgroundColor = "red";
+           otpbutton.textContent = "wrong or expired"
+           otpbutton.style.backgroundColor = "red";
+           setTimeout(function(){
+            otpinputarea.style.borderColor = "#fa3e8a";
+            otpbutton.style.backgroundColor = "#fa3e8a";
+            otpbutton.textContent = "check code"
+           },1650)
+       }
+
+
+    } catch (err) {
+       console.log("ERR::", err)
+    }
+ });
+      </script>
+      <!-- end contact -->
+      <!-- end footer -->
+      <%- include("partials/_footer") %>

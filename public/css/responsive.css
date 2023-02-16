@@ -334,3 +334,10 @@ ul.menu_footer li a {
 padding-bottom: 30px;}
 .studio_img {padding-right: 0;}
 }
+
+@media (min-width: 768px) {
+    .carousel-photo{
+        width: 450px;
+        height: 300px;
+    }
+}

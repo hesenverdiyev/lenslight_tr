@@ -168,23 +168,23 @@
                   </div>
                 </div>
                 <div class="col-md-10 offset-md-1">
-                  <form id="request" class="main_form" method="POST" action="/photos" enctype="multipart/form-data">
+                  <form id="request" class="main_form" method="POST" action="/photos" enctype="multipart/form-data" onsubmit="document.getElementById('submitButton').disabled=true;">
                     <div class="row">
                       <div class="col-md-12">
-                        <input class="form_control" placeholder="Name" type="text" name="name">
+                        <input class="form_control" placeholder="Name (required)" type="text" name="name">
                       </div>
                       <div class="col-md-12">
                         <textarea name="description" style="height: 150px;" class="form_control"
-                          placeholder="Description" rows="5"></textarea>
+                          placeholder="Description (required)" rows="5"></textarea>
                       </div>
 
                       <div style="margin-bottom: 20px ;" class="col-md-12">
-                        <input type="file" name="image" class="form-control-file">
+                        <input type="file" name="image" class="form-control-file" accept="image/*" id="fileInput">
                       </div>
 
                       <div class="col-md-12">
                         <div class="group_form">
-                          <button class="read_more">Upload File</button>
+                          <input id="submitButton" style="width: 115px; height: 45px;" type="submit" value="Upload Photo" disabled />
                         </div>
                       </div>
                     </div>
@@ -196,4 +196,36 @@
         </div>
       </div>
       <!-- end footer -->
+      <script>
+       const nameInput = document.querySelector('input[name="name"]');
+const descriptionInput = document.querySelector('textarea[name="description"]');
+const fileInput = document.getElementById('fileInput');
+const submitButton = document.getElementById('submitButton');
+
+function isImage(file) {
+  const acceptedImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+  return acceptedImageTypes.includes(file.type);
+}
+
+fileInput.addEventListener('change', function() {
+          const file = this.files[0];
+          if (!isImage(file)) {
+            alert('Only images are allowed');
+            this.value = '';
+          } 
+        });
+
+function updateSubmitButton() {
+  if (nameInput.value && descriptionInput.value && fileInput.value && isImage(fileInput.files[0])) {
+    submitButton.disabled = false;
+  } else {
+    submitButton.disabled = true;
+  }
+}
+
+nameInput.addEventListener('input', updateSubmitButton);
+descriptionInput.addEventListener('input', updateSubmitButton);
+fileInput.addEventListener('change', updateSubmitButton);
+
+      </script>
       <%- include("partials/_footer") %>
