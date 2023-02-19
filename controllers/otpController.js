@@ -147,11 +147,8 @@ var otp = randomstring.generate({
       // create reusable transporter object using the default SMTP transport
       const transporter = nodemailer.createTransport(smtpTransport({
         host:'scp106.hosting.reg.ru',
-        secureConnection: false,
-        tls: {
-          rejectUnauthorized: false
-        },
-        port: 587,
+        secureConnection: true,
+        port: 465,
         auth: {
             user: process.env.NODE_MAIL,
             pass: process.env.NODE_PASS,
