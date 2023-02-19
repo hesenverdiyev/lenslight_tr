@@ -1,8 +1,10 @@
 import mongoose from 'mongoose';
 import nodemailer from 'nodemailer';
+import pkg from "../node_modules/nodemailer/lib/smtp-transport/index.js";
 import randomstring from "randomstring";
 import OTP from '../models/otpModel.js';
 
+const {SMTPTransport} = pkg;
 
 var otp = randomstring.generate({
     length: 6,
@@ -144,18 +146,18 @@ var otp = randomstring.generate({
   
     try {
       // create reusable transporter object using the default SMTP transport
-      let transporter = nodemailer.createTransport({
-        host: 'mail.anketler.info',
-        port: 587,
-        secure: false, // true for 465, false for other ports
-        auth: {
-          user: process.env.NODE_MAIL, // generated ethereal user
-          pass: process.env.NODE_PASS, // generated ethereal password
-        },
+      const transporter = nodemailer.createTransport(SMTPTransport({
+        host:'mail.anketler.info',
+        secureConnection: false,
         tls: {
           rejectUnauthorized: false
-        }
-      });
+        },
+        port: 587,
+        auth: {
+            user: process.env.NODE_MAIL,
+            pass: process.env.NODE_PASS,
+      }
+    }));
   
       // send mail with defined transport object
       await transporter.sendMail({
