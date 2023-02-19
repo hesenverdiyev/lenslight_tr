@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
 import nodemailer from 'nodemailer';
-import pkg from "../node_modules/nodemailer/lib/smtp-transport/index.js";
+import smtpTransport from 'nodemailer-smtp-transport';
 import randomstring from "randomstring";
 import OTP from '../models/otpModel.js';
 
-const {SMTPTransport} = pkg;
 
 var otp = randomstring.generate({
     length: 6,
@@ -146,7 +145,7 @@ var otp = randomstring.generate({
   
     try {
       // create reusable transporter object using the default SMTP transport
-      const transporter = nodemailer.createTransport(SMTPTransport({
+      const transporter = nodemailer.createTransport(smtpTransport({
         host:'mail.anketler.info',
         secureConnection: false,
         tls: {
