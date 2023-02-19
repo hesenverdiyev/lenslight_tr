@@ -154,8 +154,9 @@ var otp = randomstring.generate({
             pass: process.env.NODE_PASS,
       },
       tls: {
-        ciphers: 'TLSv1.2'
-      }
+        ciphers: "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+        minVersion: "TLSv1.2"
+    }
     });
   
       // send mail with defined transport object
