@@ -182,19 +182,20 @@ const sendMail = async (req, res) => {
 
   try {
     // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-      host: 'mail.anketler.info',
+    const transporter = nodemailer.createTransport({
+      host: process.env.NODE_MAILHOST,
       port: 465,
-      secure: true, // true for 465, false for other ports
+      secure: true,
       auth: {
-        user: process.env.NODE_MAIL, // generated ethereal user
-        pass: process.env.NODE_PASS, // generated ethereal password
-      },
-    });
+          user: process.env.NODE_MAIL,
+          pass: process.env.NODE_PASS,
+    },
+  });
 
     // send mail with defined transport object
     await transporter.sendMail({
-      to: 'iletisim@anketler.info', // list of receivers
+      from: `Lenslight <${process.env.NODE_MAIL}>`,
+      to: process.env.NODE_MAIL, // list of receivers
       subject: `MAIL FROM ${req.body.email}`, // Subject line
       html: htmlTemplate, // html body
     });

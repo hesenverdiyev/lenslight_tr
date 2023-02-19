@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import nodemailer from 'nodemailer';
-// // import smtpTransport from 'nodemailer-smtp-transport';
 import randomstring from "randomstring";
 import OTP from '../models/otpModel.js';
 
@@ -146,20 +145,18 @@ var otp = randomstring.generate({
     try {
       // create reusable transporter object using the default SMTP transport
       const transporter = nodemailer.createTransport({
-        host:'scp106.hosting.reg.ru',
-        port: 587,
-        secure: false,
+        host: process.env.NODE_MAILHOST,
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.NODE_MAIL,
             pass: process.env.NODE_PASS,
-      },
-      tls: {
-        ciphers: "SSLv3",
       },
     });
   
       // send mail with defined transport object
       await transporter.sendMail({
+        from: `Lenslight <${process.env.NODE_MAIL}>`,
         to: `${req.body.email}`, // list of receivers
         subject: `Confirmation code for Lenslight Registration`, // Subject line
         html: htmlTemplate, // html body
